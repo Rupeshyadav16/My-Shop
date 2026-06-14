@@ -6,13 +6,25 @@
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_dG9wLWRvYmVybWFuLTk1LmNsZXJrLmFjY291bnRzLmRldiQ",
+        "EXPO_PUBLIC_RAZORPAY_KEY_ID": "rzp_test_SxpUcwq0y8c5Zb"
+      }
     },
     "preview": {
-      "distribution": "internal"
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_dG9wLWRvYmVybWFuLTk1LmNsZXJrLmFjY291bnRzLmRldiQ",
+        "EXPO_PUBLIC_RAZORPAY_KEY_ID": "rzp_test_SxpUcwq0y8c5Zb"
+      }
     },
     "production": {
-      "autoIncrement": true
+      "autoIncrement": true,
+      "env": {
+        "EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_dG9wLWRvYmVybWFuLTk1LmNsZXJrLmFjY291bnRzLmRldiQ",
+        "EXPO_PUBLIC_RAZORPAY_KEY_ID": "rzp_test_SxpUcwq0y8c5Zb"
+      }
     }
   },
   "submit": {
