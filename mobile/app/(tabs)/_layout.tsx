@@ -9,7 +9,7 @@ const TabsLayout = () => {
   const { isSignedIn, isLoaded } = useAuth();
   const insets = useSafeAreaInsets();
 
-  if (!isLoaded) return null; // for a better ux
+  if (!isLoaded) return null;
   if (!isSignedIn) return <Redirect href={"/(auth)"} />;
 
   return (
@@ -23,22 +23,16 @@ const TabsLayout = () => {
           borderTopWidth: 0,
           height: 32 + insets.bottom,
           paddingTop: 4,
-          marginHorizontal: 100,
+          marginHorizontal: 40,
           marginBottom: insets.bottom,
           borderRadius: 24,
           overflow: "hidden",
         },
         tabBarBackground: () => (
-          <BlurView
-            intensity={80}
-            tint="dark"
-            style={StyleSheet.absoluteFill}
-            // StyleSheet.absoluteFill is equal to this 👇
-            // { position: "absolute", top: 0, right: 0, left: 0, bottom: 0 }
-          />
+          <BlurView intensity={80} tint="dark" style={StyleSheet.absoluteFill} />
         ),
         tabBarLabelStyle: {
-          fontSize: 12,
+          fontSize: 11,
           fontWeight: 600,
         },
         headerShown: false,
@@ -56,6 +50,15 @@ const TabsLayout = () => {
         options={{
           title: "Cart",
           tabBarIcon: ({ color, size }) => <Ionicons name="cart" size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="chat"
+        options={{
+          title: "Smart Chat",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="sparkles" size={size} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
