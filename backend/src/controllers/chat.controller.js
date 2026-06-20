@@ -18,7 +18,7 @@ export async function chatWithAI(req, res) {
       .map((p) => `${p.name} - ₹${p.price} (${p.category})`)
       .join("\n");
 
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
     const prompt = `Tum "My Shop" e-commerce app ke liye ek friendly shopping assistant ho. 
 Customer ki madad karo products dhundne, compare karne, ya recommendations dene mein.
