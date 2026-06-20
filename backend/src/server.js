@@ -3,6 +3,7 @@ import path from "path";
 import { clerkMiddleware } from "@clerk/express";
 import { serve } from "inngest/express";
 import cors from "cors";
+import chatRoutes from "./routes/chat.route.js";
 
 import { functions, inngest } from "./config/inngest.js";
 
@@ -53,6 +54,7 @@ app.use("/api/reviews", reviewRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/notifications", notificationRoutes);
+app.use("/api/chat", chatRoutes);
 
 app.get("/api/health", (req, res) => {
   res.status(200).json({ message: "Success" });

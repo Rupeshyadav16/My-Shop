@@ -27,4 +27,5 @@ export const ENV = {
   CLERK_WEBHOOK_SECRET: process.env.CLERK_WEBHOOK_SECRET,
   RESEND_API_KEY: process.env.RESEND_API_KEY,
   FAST2SMS_API_KEY: process.env.FAST2SMS_API_KEY,
+  GEMINI_API_KEY: process.env.GEMINI_API_KEY,
 };
