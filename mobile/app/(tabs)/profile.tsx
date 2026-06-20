@@ -16,7 +16,7 @@ const MENU_ITEMS = [
 ] as const;
 
 const ProfileScreen = () => {
-  const { signOut } = useAuth();
+  const { signOut, isSignedIn, isLoaded } = useAuth();
   const { user } = useUser();
 
   const isAdmin = user?.emailAddresses?.[0]?.emailAddress === ADMIN_EMAIL;
@@ -25,6 +25,40 @@ const ProfileScreen = () => {
     router.push(action);
   };
 
+  if (!isLoaded) return null;
+
+  // GUEST VIEW - not signed in
+  if (!isSignedIn) {
+    return (
+      <SafeScreen>
+        <View className="flex-1 items-center justify-center px-8">
+          <View className="bg-primary/20 rounded-full w-24 h-24 items-center justify-center mb-6">
+            <Ionicons name="person-outline" size={48} color="#1DB954" />
+          </View>
+          <Text className="text-text-primary text-2xl font-bold text-center mb-2">
+            Welcome to My Shop
+          </Text>
+          <Text className="text-text-secondary text-center mb-8 leading-6">
+            Login or create an account to track orders, save addresses, and checkout faster.
+          </Text>
+
+          <TouchableOpacity
+            className="bg-primary rounded-2xl py-4 px-8 w-full items-center"
+            activeOpacity={0.9}
+            onPress={() => router.push("/(auth)")}
+          >
+            <Text className="text-background font-bold text-base">Login / Sign Up</Text>
+          </TouchableOpacity>
+
+          <Text className="text-text-secondary text-xs text-center mt-6">
+            You can browse and add products to cart as a guest, but an account is required to place an order.
+          </Text>
+        </View>
+      </SafeScreen>
+    );
+  }
+
+  // SIGNED IN VIEW
   return (
     <SafeScreen>
       <ScrollView
@@ -147,32 +181,3 @@ const ProfileScreen = () => {
 };
 
 export default ProfileScreen;
-
-// REACT NATIVE IMAGE VS EXPO IMAGE:
-
-// React Native Image (what we have used so far):
-// import { Image } from "react-native";
-//
-// <Image source={{ uri: url }} />
-
-// Basic image component
-// No built-in caching optimization
-// Requires source={{ uri: string }}
-
-// Expo Image (from expo-image):
-// import { Image } from "expo-image";
-
-// <Image source={url} />
-
-// Caching - automatic disk/memory caching
-// Placeholder - blur hash, thumbnail while loading
-// Transitions - crossfade, fade animations
-// Better performance - optimized native rendering
-// Simpler syntax: source={url} or source={{ uri: url }}
-// Supports contentFit instead of resizeMode
-
-// Example with expo-image:
-// <Image   source={user?.imageUrl}  placeholder={blurhash}  transition={200}  contentFit="cover"  className="size-20 rounded-full"/>
-
-// Recommendation: For production apps, expo-image is better — faster, cached, smoother UX.
-// React Native's Image works fine for simple cases though.

@@ -10,9 +10,12 @@ import { Image } from "expo-image";
 import OrderSummary from "@/components/OrderSummary";
 import AddressSelectionModal from "@/components/AddressSelectionModal";
 import RazorpayWebView from "@/components/RazorpayWebView";
+import { useAuth } from "@clerk/clerk-expo";
+import { router } from "expo-router";
 
 const CartScreen = () => {
   const api = useApi();
+  const { isSignedIn } = useAuth();
   const { cart, cartItemCount, cartTotal, clearCart, isError, isLoading, isRemoving, isUpdating, removeFromCart, updateQuantity } = useCart();
   const { addresses } = useAddresses();
 
@@ -41,6 +44,20 @@ const CartScreen = () => {
 
   const handleCheckout = () => {
     if (cartItems.length === 0) return;
+
+    // Login zaroori hai checkout ke liye
+    if (!isSignedIn) {
+      Alert.alert(
+        "Login Required",
+        "Please create an account or login to continue with your purchase.",
+        [
+          { text: "Cancel", style: "cancel" },
+          { text: "Login / Sign Up", onPress: () => router.push("/(auth)") },
+        ]
+      );
+      return;
+    }
+
     if (!addresses || addresses.length === 0) {
       Alert.alert("No Address", "Please add a shipping address in your profile before checking out.", [{ text: "OK" }]);
       return;
@@ -60,7 +77,6 @@ const CartScreen = () => {
       phoneNumber: selectedAddress.phoneNumber,
     };
 
-    // COD Order
     if (paymentMethod === "cod") {
       try {
         setPaymentLoading(true);
@@ -78,7 +94,6 @@ const CartScreen = () => {
       return;
     }
 
-    // Online Payment
     try {
       setPaymentLoading(true);
       const { data } = await api.post("/payment/create-intent", {
