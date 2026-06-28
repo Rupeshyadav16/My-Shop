@@ -4,6 +4,8 @@ import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from "@ta
 import { ClerkProvider } from "@clerk/clerk-expo";
 import { tokenCache } from "@clerk/clerk-expo/token-cache";
 
+const CLERK_PUBLISHABLE_KEY = "pk_test_dG9wLWRvYmVybWFuLTk1LmNsZXJrLmFjY291bnRzLmRldiQ";
+
 const queryClient = new QueryClient({
   queryCache: new QueryCache({
     onError: (error: any, query) => {
@@ -19,7 +21,7 @@ const queryClient = new QueryClient({
 
 export default function RootLayout() {
   return (
-    <ClerkProvider tokenCache={tokenCache}>
+    <ClerkProvider tokenCache={tokenCache} publishableKey={CLERK_PUBLISHABLE_KEY}>
       <QueryClientProvider client={queryClient}>
         <Stack screenOptions={{ headerShown: false }} />
       </QueryClientProvider>
