@@ -27,7 +27,6 @@ const ProfileScreen = () => {
 
   if (!isLoaded) return null;
 
-  // GUEST VIEW - not signed in
   if (!isSignedIn) {
     return (
       <SafeScreen>
@@ -53,12 +52,19 @@ const ProfileScreen = () => {
           <Text className="text-text-secondary text-xs text-center mt-6">
             You can browse and add products to cart as a guest, but an account is required to place an order.
           </Text>
+
+          <TouchableOpacity
+            className="mt-8 flex-row items-center"
+            onPress={() => router.push("/about")}
+          >
+            <Ionicons name="information-circle-outline" size={18} color="#666" />
+            <Text className="text-text-secondary text-sm ml-2">About Us</Text>
+          </TouchableOpacity>
         </View>
       </SafeScreen>
     );
   }
 
-  // SIGNED IN VIEW
   return (
     <SafeScreen>
       <ScrollView
@@ -66,7 +72,6 @@ const ProfileScreen = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 100 }}
       >
-        {/* HEADER */}
         <View className="px-6 pb-8">
           <View className="bg-surface rounded-3xl p-6">
             <View className="flex-row items-center">
@@ -93,7 +98,6 @@ const ProfileScreen = () => {
           </View>
         </View>
 
-        {/* MENU ITEMS */}
         <View className="flex-row flex-wrap gap-2 mx-6 mb-3">
           {MENU_ITEMS.map((item) => (
             <TouchableOpacity
@@ -114,7 +118,6 @@ const ProfileScreen = () => {
           ))}
         </View>
 
-        {/* ADMIN PORTAL - Only show for admin */}
         {isAdmin && (
           <View className="mb-3 mx-6 bg-surface rounded-2xl p-4 border-2" style={{ borderColor: "#F59E0B" }}>
             <TouchableOpacity
@@ -134,7 +137,6 @@ const ProfileScreen = () => {
           </View>
         )}
 
-        {/* NOTIFICATONS BTN */}
         <View className="mb-3 mx-6 bg-surface rounded-2xl p-4">
           <TouchableOpacity
             className="flex-row items-center justify-between py-2"
@@ -149,7 +151,6 @@ const ProfileScreen = () => {
           </TouchableOpacity>
         </View>
 
-        {/* PRIVACY AND SECURTIY LINK */}
         <View className="mb-3 mx-6 bg-surface rounded-2xl p-4">
           <TouchableOpacity
             className="flex-row items-center justify-between py-2"
@@ -164,7 +165,20 @@ const ProfileScreen = () => {
           </TouchableOpacity>
         </View>
 
-        {/* SIGNOUT BTN */}
+        <View className="mb-3 mx-6 bg-surface rounded-2xl p-4">
+          <TouchableOpacity
+            className="flex-row items-center justify-between py-2"
+            activeOpacity={0.7}
+            onPress={() => router.push("/about")}
+          >
+            <View className="flex-row items-center">
+              <Ionicons name="information-circle-outline" size={22} color="#FFFFFF" />
+              <Text className="text-text-primary font-semibold ml-3">About Us</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={20} color="#666" />
+          </TouchableOpacity>
+        </View>
+
         <TouchableOpacity
           className="mx-6 mb-3 bg-surface rounded-2xl py-5 flex-row items-center justify-center border-2 border-red-500/20"
           activeOpacity={0.8}

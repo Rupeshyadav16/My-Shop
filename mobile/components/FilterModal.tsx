@@ -22,17 +22,17 @@ export interface FilterOptions {
 }
 
 const PRICE_RANGES = [
-  { label: "All Prices", value: [0, 10000] },
-  { label: "$0 - $50", value: [0, 50] },
-  { label: "$50 - $100", value: [50, 100] },
-  { label: "$100 - $200", value: [100, 200] },
-  { label: "$200+", value: [200, 10000] },
+  { label: "All Prices", value: [0, 100000] },
+  { label: "₹0 - ₹500", value: [0, 500] },
+  { label: "₹500 - ₹1000", value: [500, 1000] },
+  { label: "₹1000 - ₹5000", value: [1000, 5000] },
+  { label: "₹5000+", value: [5000, 100000] },
 ];
 
 const RATING_FILTERS = [1, 2, 3, 4, 5];
 
 export default function FilterModal({ visible, onClose, onApplyFilters }: FilterModalProps) {
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 10000]);
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 100000]);
   const [minRating, setMinRating] = useState(0);
   const [inStockOnly, setInStockOnly] = useState(false);
 
@@ -46,7 +46,7 @@ export default function FilterModal({ visible, onClose, onApplyFilters }: Filter
   };
 
   const handleReset = () => {
-    setPriceRange([0, 10000]);
+    setPriceRange([0, 100000]);
     setMinRating(0);
     setInStockOnly(false);
   };

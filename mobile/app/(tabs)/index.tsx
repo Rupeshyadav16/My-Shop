@@ -18,7 +18,6 @@ const CATEGORIES = [
 ];
 
 function getFlashSaleEndTime() {
-  // Flash sale ends at midnight every day
   const now = new Date();
   const midnight = new Date(now);
   midnight.setHours(24, 0, 0, 0);
@@ -55,7 +54,7 @@ const ShopScreen = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [filterModalVisible, setFilterModalVisible] = useState(false);
   const [filters, setFilters] = useState<FilterOptions>({
-    priceRange: [0, 10000],
+    priceRange: [0, 100000],
     rating: 0,
     inStock: false,
   });
@@ -89,7 +88,6 @@ const ShopScreen = () => {
     return filtered;
   }, [products, selectedCategory, searchQuery, filters]);
 
-  // Top rated products for "Featured" horizontal section
   const featuredProducts = useMemo(() => {
     if (!products) return [];
     return [...products].sort((a, b) => b.averageRating - a.averageRating).slice(0, 8);
@@ -107,7 +105,6 @@ const ShopScreen = () => {
         contentContainerStyle={{ paddingBottom: 100 }}
         showsVerticalScrollIndicator={false}
       >
-        {/* HEADER */}
         <View className="px-6 pb-4 pt-6">
           <View className="flex-row items-center justify-between mb-6">
             <View>
@@ -124,7 +121,6 @@ const ShopScreen = () => {
             </TouchableOpacity>
           </View>
 
-          {/* SEARCH BAR */}
           <View className="bg-surface flex-row items-center px-5 py-4 rounded-2xl">
             <Ionicons color={"#666"} size={22} name="search" />
             <TextInput
@@ -137,7 +133,6 @@ const ShopScreen = () => {
           </View>
         </View>
 
-        {/* FLASH SALE BANNER */}
         <View className="px-6 mb-6">
           <View
             className="bg-primary/15 rounded-3xl p-5 border border-primary/30"
@@ -160,7 +155,6 @@ const ShopScreen = () => {
           </View>
         </View>
 
-        {/* CATEGORY FILTER */}
         <View className="mb-6">
           <Text className="text-text-primary text-lg font-bold px-6 mb-3">Top Categories</Text>
           <ScrollView
@@ -203,7 +197,6 @@ const ShopScreen = () => {
           </ScrollView>
         </View>
 
-        {/* FEATURED PRODUCTS - HORIZONTAL */}
         {!isLoading && featuredProducts.length > 0 && (
           <View className="mb-6">
             <View className="flex-row items-center justify-between px-6 mb-3">
@@ -263,7 +256,6 @@ const ShopScreen = () => {
             <Text className="text-text-secondary text-sm">{filteredProducts.length} items</Text>
           </View>
 
-          {/* PRODUCTS GRID */}
           <ProductsGrid products={filteredProducts} isLoading={isLoading} isError={isError} />
         </View>
       </ScrollView>
