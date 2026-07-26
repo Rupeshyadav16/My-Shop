@@ -109,3 +109,23 @@ npm install
 npx expo start
 *And then scan the QR Code from your phone*
 ```
+# 👋 Hi, I'm Rupesh Yadav
+
+## 🛍️ My Shop — E-Commerce App
+
+### 📱 Download App
+[Download APK](https://expo.dev/accounts/rupeshyadavv/projects/mobile/builds/a9e2b154-f1d7-4b99-baaf-75a383ed4a7b)
+
+### 🔗 Live Links
+- **Admin Dashboard:** https://my-shop-admin-seven.vercel.app
+- **Backend API:** https://my-shop-production-6b08.up.railway.app/api/health
+
+### 🛠️ Tech Stack
+- **Mobile:** React Native + Expo
+- **Backend:** Node.js + Express + MongoDB
+- **Payments:** Razorpay
+- **Auth:** Clerk
+- **Hosting:** Railway + Vercel
+
+### 📞 Contact
+- 📧 Email: ry728309@gmail.com
